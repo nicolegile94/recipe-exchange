@@ -60,13 +60,14 @@ router.post('/', (req, res) => {
   });  
 
 router.put('/madeit', (req, res) => {
-  MadeIt.create({
-    user_id: req.body.user_id,
-    recipe_id: req.body.recipe_id
-  })
-    .then(dbRecipeData => res.json(dbRecipeData))
-    .catch(err => res.json(err));
-});
+    // custom static method created in models/Post.js
+    Recipe.madeitvote(req.body, { MadeIt })
+      .then(updatedRecipeData => res.json(updatedRecipeData))
+      .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  });
 
 router.put('/:id', (req, res) => {
     Recipe.update(
