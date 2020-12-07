@@ -1,12 +1,27 @@
 const router = require('express').Router();
-const { Recipe, User, MadeIt } = require('../../models');
+const sequelize = require('../../config/connection');
+const { Recipe, User, MadeIt, Comment } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
     Recipe.findAll({
-      attributes: ['id', 'recipe_url', 'title', 'created_at'],
       order: [['created_at', 'DESC']],
+      attributes: [
+        'id', 
+        'recipe_url', 
+        'title', 
+        'created_at',
+        [sequelize.literal('(SELECT COUNT(*) FROM madeit WHERE recipe.id = madeit.recipe_id)'), 'madeit_count']
+      ],
       include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'recipe_id', 'user_id', 'created_at'],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+        },
         {
           model: User,
           attributes: ['username']
@@ -25,8 +40,22 @@ router.get('/:id', (req, res) => {
       where: {
         id: req.params.id
       },
-      attributes: ['id', 'recipe_url', 'title', 'created_at'],
+      attributes: [
+        'id', 
+        'recipe_url', 
+        'title', 
+        'created_at',
+        [sequelize.literal('(SELECT COUNT(*) FROM madeit WHERE recipe.id = madeit.recipe_id)'), 'madeit_count']
+      ],
       include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'recipe_id', 'user_id', 'created_at'],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+        },
         {
           model: User,
           attributes: ['username']
