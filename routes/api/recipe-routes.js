@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Recipe, User } = require('../../models');
+const sequelize = require('../../config/connection');
+const { Recipe, User, MadeIt } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
@@ -58,6 +59,15 @@ router.post('/', (req, res) => {
         res.status(500).json(err);
       });
   });  
+
+router.put('/madeit', (req, res) => {
+  MadeIt.create({
+    user_id: req.body.user_id,
+    recipe_id: req.body.recipe_id
+  })
+    .then(dbRecipeData => res.json(dbRecipeData))
+    .catch(err => res.json(err));
+});
 
 router.put('/:id', (req, res) => {
     Recipe.update(
