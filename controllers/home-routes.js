@@ -1,6 +1,3 @@
-const { constant } = require("lodash");
-const { route } = require("./api");
-
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Recipe, User, Comment } = require('../models');

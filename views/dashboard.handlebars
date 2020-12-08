@@ -20,7 +20,7 @@
   <ol>
     {{#each recipes as |recipe|}}
     <li>
-      {{> recipe-info recipe}}
+      {{recipe}}
       <a href="/dashboard/edit/{{recipe.id}}" class="edit-link">Edit recipe</a>
     </li>
     {{/each}}

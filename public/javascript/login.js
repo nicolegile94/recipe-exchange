@@ -1,6 +1,3 @@
-const { response } = require("express");
-const { constant } = require("lodash");
-
 async function signupFormHandler(event) {
     event.preventDefault();
   

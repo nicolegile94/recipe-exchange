@@ -15,7 +15,7 @@
         <a href="/">Recipe Exchange</a>
       </h1>
       <nav>
-        {{#id loddedIn}}
+        {{#if loggedIn}}
           <a href="/dashboard">dashboard</a>
           <button id="logout">logout</button>
           {{else}}
