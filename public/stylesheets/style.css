@@ -1,0 +1,43 @@
+body{
+  padding:0 100px 100px;
+}
+
+h1#header{
+  text-align: center;
+  padding:50px;
+  font-size: 62px;
+  font-family: "Pacifico";
+}
+
+article{
+  position:relative;
+  margin-bottom: 30px;
+  background-color: #FFF;
+  cursor:pointer;
+}
+
+h1{
+    font-size: 24px;
+    color: #428bca;
+}
+
+p{
+    color: #888;
+}
+
+a{
+    position:absolute;
+    display:block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+    background-color: #FFF;
+    font-size: 48px;
+    font-style:italic;
+    opacity:0;
+    color: #428bca !important;
+    text-decoration: none !important;
+    font-family: "Pacifico";
+}
