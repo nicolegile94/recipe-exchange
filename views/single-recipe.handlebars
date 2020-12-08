@@ -1,0 +1,43 @@
+<article class="recipe">
+  <div class="title">
+    <a href="{{recipe.recipe_url}}" target="_blank">{{recipe.title}}</a>
+    <span>({{recipe.recipe_url}})</span>
+  </div>
+  <div class="meta">
+    {{recipe.madeit_count}} point(s) by {{recipe.user.username}} on
+    {{recipe.created_at}}
+    |
+    <a href="/recipe/{{recipe.id}}">{{recipe.comments.length}} comment(s)</a>
+  </div>
+
+  {{#if loggedIn}}
+  <form class="comment-form">
+  <div>
+    <textarea name="comment-body"></textarea>
+  </div>
+
+  <div>
+    <button type="submit">add comment</button>
+    <button type="button" class="madeit-btn">Made It!</button>
+  </div>
+</form>
+{{/if}}
+
+<div class="comments">
+  {{#each recipe.comments}}
+  <section class="comment">
+    <div class="meta">
+      {{user.username}} on {{created_at}}
+    </div>
+    <div class="text">
+      {{comment_text}}
+    </div>
+  </section>
+  {{/each}}
+</div>
+</article>
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+<script src="/javascript/madeit.js"></script>
+{{/if}}

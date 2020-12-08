@@ -79,7 +79,7 @@ router.post('/', (req, res) => {
     Recipe.create({
       title: req.body.title,
       recipe_url: req.body.recipe_url,
-      user_id: req.body.user_id
+      user_id: req.session.user_id
     })
       .then(dbRecipeData => res.json(dbRecipeData))
       .catch(err => {
@@ -89,13 +89,16 @@ router.post('/', (req, res) => {
   });  
 
 router.put('/madeit', (req, res) => {
-    // custom static method created in models/Post.js
-    Recipe.madeitvote(req.body, { MadeIt })
-      .then(updatedRecipeData => res.json(updatedRecipeData))
-      .catch(err => {
-        console.log(err);
-        res.status(400).json(err);
-      });
+    // make sure the session exists first
+    if (req.session) {
+      // pass session id along with all destructured properties on req.body
+      Recipe.madeit({ ...req.body, user_id: req.session.user_id }, { MadeIt, Comment, User })
+        .then(updatedMadeitData => res.json(updatedMadeitData))
+        .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+        });
+    }
   });
 
 router.put('/:id', (req, res) => {
