@@ -1,0 +1,18 @@
+<ol class="recipe-list">
+    {{#each recipes as |recipe| }}
+  <li>
+    <article class="recipe">
+      <div class="title">
+        <a href="{{recipe_url}}" target="_blank">{{title}}</a>
+        <span>({{recipe_url}})</span>
+      </div>
+      <div class="meta">
+        {{madeit_count}} point(s) by {{user.username}} on
+        {{created_at}}
+        |
+        <a href="/post/{{id}}">{{comments.length}} comment(s)</a>
+      </div>
+    </article>
+  </li>
+  {{/each}}
+</ol>
