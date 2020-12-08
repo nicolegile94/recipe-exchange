@@ -11,7 +11,7 @@
     <div>
       {{recipe.madeit_count}} {{format_plural "point" recipe.madeit_count}} by you on {{format_date recipe.created_at}}
       |
-      <a href="/recipe/{{recipe.id}}">{{recipe.comments.length}} {{format_plural "comment" recipe.comments.length}}</a>
+      <a href="/recipe/{{recipe.id}}">{{recipe.comments.length}} comment(s) {{recipe.comments.length}}</a>
     </div>
     <button type="submit">Save post</button>
     <button type="button" class="delete-post-btn">Delete post</button>
